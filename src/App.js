@@ -10,8 +10,9 @@ import { Login } from "./components/Auth/Login";
 import { PublicRoute } from "./components/Auth/PublicRoute";
 import { Register } from "./components/Auth/Register";
 import { NavBar } from "./components/Navbar/NavBar";
-import { TodoDetail } from "./components/Todo/TodoDetail";
-import { TodoList } from "./components/Todo/TodoList";
+
+import { WalletDetail } from "./components/Wallet/WalletDetail";
+import { WalletList } from "./components/Wallet/WalletList";
 import { AuthConsumer, AuthProvider } from "./context/JWTAuthContext";
 
 function App() {
@@ -58,7 +59,7 @@ function App() {
                       path="/"
                       element={
                         <Authenticated>
-                          <TodoList />
+                          <WalletList />
                         </Authenticated>
                       }
                     />
@@ -66,7 +67,7 @@ function App() {
                       path="/:walletChain/:walletAddress"
                       element={
                         <Authenticated>
-                          <TodoDetail />
+                          <WalletDetail />
                         </Authenticated>
                       }
                     />

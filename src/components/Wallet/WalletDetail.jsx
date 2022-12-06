@@ -10,10 +10,10 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axiosInstance from "../../services/axios";
-import { AddUpdateTodoModal } from "./AddUpdateTodoModal";
+import { AddWalletModal } from "./AddWalletModal";
 
-export const TodoDetail = () => {
-  const [wallet, setTodo] = useState({});
+export const WalletDetail = () => {
+  const [wallet, setWallet] = useState({});
   const [loading, setLoading] = useState(true);
   const isMounted = useRef(false);
   const { walletAddress, walletChain } = useParams();
@@ -23,16 +23,16 @@ export const TodoDetail = () => {
 
   useEffect(() => {
     if (isMounted.current) return;
-    fetchTodo();
+    fetchWallet();
     isMounted.current = true;
   }, [walletAddress]);
 
-  const fetchTodo = () => {
+  const fetchWallet = () => {
     setLoading(true);
     axiosInstance
       .get(`/funds/wallets/${walletChain}/${walletAddress}`)
       .then((res) => {
-        setTodo(res.data);
+        setWallet(res.data);
       })
       .catch((error) => console.error(error))
       .finally(() => {
@@ -40,7 +40,7 @@ export const TodoDetail = () => {
       });
   };
 
-  const delateTodo = () => {
+  const deleteWallet = () => {
     setLoading(true);
     axiosInstance
       .delete(`/funds/wallets/${walletChain}/${walletAddress}`)
@@ -49,7 +49,7 @@ export const TodoDetail = () => {
           title: "Fund deleted successfully",
           status: "success",
           isClosable: true,
-          diration: 1500,
+          duration: 1500,
         });
         navigate("/");
       })
@@ -59,7 +59,7 @@ export const TodoDetail = () => {
           title: "Couldn't delete the fund",
           status: "error",
           isClosable: true,
-          diration: 2000,
+          duration: 2000,
         });
       })
       .finally(() => setLoading(false));
@@ -105,19 +105,19 @@ export const TodoDetail = () => {
           {wallet.h_network_name}
         </Text>
 
-        <AddUpdateTodoModal
+        <AddWalletModal
           my={3}
           defaultValues={{
             address: wallet.h_address,
             chain: wallet.h_network_name
           }}
-          onSuccess={fetchTodo}
+          onSuccess={fetchWallet}
         />
         <Button
           isLoading={loading}
           colorScheme="red"
           width="100%"
-          onClick={delateTodo}
+          onClick={deleteWallet}
         >
           Delete Wallet
         </Button>

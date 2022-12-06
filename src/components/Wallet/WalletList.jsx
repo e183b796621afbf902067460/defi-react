@@ -1,26 +1,26 @@
 import { Box, Center, Container, Spinner } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 import axiosInstance from "../../services/axios";
-import { AddUpdateTodoModal } from "./AddUpdateTodoModal";
-import { TodoCard } from "./TodoCard";
+import { AddWalletModal } from "./AddWalletModal";
+import { WalletCard } from "./WalletCard";
 
-export const TodoList = () => {
-  const [wallets, setTodos] = useState([]);
+export const WalletList = () => {
+  const [wallets, setWallets] = useState([]);
   const [loading, setLoading] = useState(true);
   const isMounted = useRef(false);
 
   useEffect(() => {
     if (isMounted.current) return;
-    fetchTodos();
+    fetchWallets();
     isMounted.current = true;
   }, []);
 
-  const fetchTodos = () => {
+  const fetchWallets = () => {
     setLoading(true);
     axiosInstance
       .get("/funds/wallets/all")
       .then((res) => {
-        setTodos(res.data);
+        setWallets(res.data);
       })
       .catch((error) => {
         console.error(error);
@@ -32,7 +32,7 @@ export const TodoList = () => {
 
   return (
     <Container mt={9}>
-      <AddUpdateTodoModal onSuccess={fetchTodos} />
+      <AddWalletModal onSuccess={fetchWallets} />
       {loading ? (
         <Center mt={6}>
           <Spinner
@@ -46,7 +46,7 @@ export const TodoList = () => {
       ) : (
         <Box mt={6}>
           {wallets?.map((wallet) => (
-            <TodoCard wallet={wallet} key={wallet.h_address} />
+            <WalletCard wallet={wallet} key={wallet.h_address} />
           ))}
         </Box>
       )}

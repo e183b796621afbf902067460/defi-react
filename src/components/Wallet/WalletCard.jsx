@@ -1,7 +1,7 @@
 import { Badge, Flex, Text, useColorModeValue } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
-export const TodoCard = ({ wallet }) => {
+export const WalletCard = ({ wallet }) => {
   const navigate = useNavigate();
   return (
     <Flex
