@@ -10,10 +10,10 @@ import {
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axiosInstance from "../../services/axios";
-import { AddWalletModal } from "./AddWalletModal";
+import { AddFundModal } from "./AddFundModal";
 
-export const WalletDetail = () => {
-  const [wallet, setWallet] = useState({});
+export const FundDetail = () => {
+  const [fund, setFund] = useState({});
   const [loading, setLoading] = useState(true);
   const isMounted = useRef(false);
   const { walletAddress, walletChain } = useParams();
@@ -23,16 +23,16 @@ export const WalletDetail = () => {
 
   useEffect(() => {
     if (isMounted.current) return;
-    fetchWallet();
+    fetchFund();
     isMounted.current = true;
   }, [walletAddress]);
 
-  const fetchWallet = () => {
+  const fetchFund = () => {
     setLoading(true);
     axiosInstance
       .get(`/funds/wallets/${walletChain}/${walletAddress}`)
       .then((res) => {
-        setWallet(res.data);
+        setFund(res.data);
       })
       .catch((error) => console.error(error))
       .finally(() => {
@@ -40,7 +40,7 @@ export const WalletDetail = () => {
       });
   };
 
-  const deleteWallet = () => {
+  const deleteFund = () => {
     setLoading(true);
     axiosInstance
       .delete(`/funds/wallets/${walletChain}/${walletAddress}`)
@@ -100,23 +100,19 @@ export const WalletDetail = () => {
         alignItems="center"
         justifyContent="space-between"
       >
-        <Text fontSize={18}> {wallet.h_address} | {wallet.h_network_name} </Text>
+        <Text fontSize={18}> {fund.h_address} | {fund.h_network_name} </Text>
 
-        <AddWalletModal
+        <AddFundModal
           my={3}
-          defaultValues={{
-            address: wallet.h_address,
-            chain: wallet.h_network_name
-          }}
-          onSuccess={fetchWallet}
+          onSuccess={fetchFund}
         />
         <Button
           isLoading={loading}
           colorScheme="red"
           width="100%"
-          onClick={deleteWallet}
+          onClick={deleteFund}
         >
-          Delete Wallet
+          Delete Fund
         </Button>
       </Container>
     </>

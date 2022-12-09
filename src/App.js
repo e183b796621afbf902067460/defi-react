@@ -15,6 +15,8 @@ import { WalletDetail } from "./components/Wallet/WalletDetail";
 import { WalletList } from "./components/Wallet/WalletList";
 import { AuthConsumer, AuthProvider } from "./context/JWTAuthContext";
 
+import { FundDetail } from "./components/Fund/FundDetail";
+
 function App() {
   return (
     <>
@@ -67,7 +69,7 @@ function App() {
                       path="/:walletChain/:walletAddress"
                       element={
                         <Authenticated>
-                          <WalletDetail />
+                          <FundDetail />
                         </Authenticated>
                       }
                     />

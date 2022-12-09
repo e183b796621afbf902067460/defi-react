@@ -19,7 +19,7 @@ export const WalletCard = ({ wallet }) => {
       }}
       onClick={() => navigate(`/${wallet.h_network_name}/${wallet.h_address}`, { replace: true })}
     >
-      <Text>{wallet.h_address}</Text>
+      <Text>{wallet.h_address} | {wallet.h_network_name}</Text>
     </Flex>
   );
 };
