@@ -52,3 +52,13 @@ docker run -p 3000:3000 -d defi_react
 ```
 
 `Result will be at` [http://0.0.0.0:3000](http://0.0.0.0:3000)
+
+# Exit
+- To stop all running containers:
+```
+docker stop $(docker ps -a -q)
+```
+- And remove it all:
+```
+docker rm $(docker ps -a -q)
+```
