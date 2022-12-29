@@ -48,7 +48,7 @@ docker build -t defi_react .
 
 - Docker run (`sudo`):
 ```
-docker run -p 3000:3000 -d defi_reac
+docker run -p 3000:3000 -d defi_react
 ```
 
 `Result will be at` [http://0.0.0.0:3000](http://0.0.0.0:3000)
