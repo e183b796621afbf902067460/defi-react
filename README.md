@@ -33,3 +33,22 @@ npm install
 ```
 npm start
 ```
+`Result will be at` [http://0.0.0.0:3000](http://0.0.0.0:3000)
+
+# Docker
+- Set the __baseURL__ variable in [axios.js](https://github.com/e183b796621afbf902067460/defi-react/blob/master/src/services/axios.js) to allow [backend](https://github.com/e183b796621afbf902067460/defi-fastapi), by default:
+```js
+const baseURL = "http://0.0.0.0:8000/api/v1/";
+```
+
+- Run docker build (`sudo`):
+```
+docker build -t defi_react .
+```
+
+- Docker run (`sudo`):
+```
+docker run -p 3000:3000 -d defi_reac
+```
+
+`Result will be at` [http://0.0.0.0:3000](http://0.0.0.0:3000)
